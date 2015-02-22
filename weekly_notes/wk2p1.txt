@@ -1,0 +1,45 @@
+Week 2 Period 1: Basic File System Commands
+-------------------------------------------
+
+Buzzwords
+----------
+
+CLI:  command line interface
+GUI:  graphical user interface
+
+File utilities discussed in class
+---------------------------------
+
+pwd :   print working directory tells you where you are in the filesystem
+ls  :   list (files in current directory)
+ls -l:  long list files (show all file properties)
+cd  :   change directory
+find:   find files
+clear:  clear the screen
+rm  :   remove files (delete them - NO UNDO)
+
+Symbols discussed in class
+-------------------------
+
+~   :   home directory
+/   :   root directory (also path separator when not the first char)
+
+Shortcuts discussed
+-------------------
+ARROW UP/DN for moving forward or back through command history
+CTRL+L: clears the screen
+TAB:    completes command (or directory/file name)
+TAB TAB: shows all completions when not unique
+
+
+
+LINUX/UNIX maxims discussed
+----------------------------
+
+* UNIX is an oral tradition
+* UNIX is a humble servant but brutal master
+* You got to know what you are looking for before you find it
+* No news is good news.
+* Everything is a file, yes even directories, disks, cdrom, usb, etc.
+
+

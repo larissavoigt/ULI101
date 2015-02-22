@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# if $# (no of arguments) is not exactly 3 
+if [ $# -ne 3 ]
+then
+      echo "This script requires 3 arguments" >&2
+      exit 1
+fi
+
+# yes, then show what they are $* (argument list)
+echo "You gave me $# arguments, they are: $*"

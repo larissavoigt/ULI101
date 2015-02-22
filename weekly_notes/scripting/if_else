@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# ULI101:       script 3 - get input, store it, decide, display appropriately
+# Script name:  whats_your_name
+# Purpose:      understand input, storage, decision making, and output
+
+# create a variable and leave it empty
+NAME=
+
+# get input from user and store it in the variable NAME
+read -p "Whats your name? " NAME
+
+# is the name entered the same as the login name?
+if [ "$NAME" = "$USER" ]
+then
+    # yes then display some more environment variables
+    echo '$PS1'="$PS1"
+    echo "\$PWD=$PWD"
+    echo \$PATH=$PATH
+    echo "HOME=$HOME"
+    echo $HOST
+    echo $USER
+    echo $SHELL
+    echo $BS
+else
+    # no then display name entered back to the user
+    echo "Hello $NAME"
+fi

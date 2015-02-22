@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# ULI101:       script 1 - introduction (output only)
+# Script name:  hello
+# Purpose:      display a message
+
+
+# display message to user
+echo "Hello bash"

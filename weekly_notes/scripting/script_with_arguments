@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# ULI101:       script_with_arguments
+# Script name:  script_with_arguments
+# Purpose:      take input from user and display it back
+
+# display usage message to user if no parameters are entered
+if [ $# -lt 1 ]
+then
+    echo "Usage: $(basename $0) \$1...\$N"
+    exit 1
+fi
+
+echo "Using \$*"
+INDEX=1
+# otherwise print each argument entered (observe difference in $* and $@)
+for ARG in $*
+do
+    echo "\$$INDEX=$ARG"
+    INDEX=$((INDEX+1))
+done
+
+# removes $1 from list of input arguments
+shift
+echo "...after shift ..."
+
+echo "Using \"\$@\""
+INDEX=1
+# otherwise print each argument entered
+for ARG in "$@"
+do
+    echo "\$$INDEX=$ARG"
+    INDEX=$((INDEX+1))
+done
+
+

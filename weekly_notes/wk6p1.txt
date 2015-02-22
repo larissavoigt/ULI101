@@ -1,0 +1,40 @@
+Week 6: Running as a Live User
+
+# start by ensuring you are in the home directory
+cd 
+
+# download the vim-settings.tgz from /home/mark.fernandes/goodies
+# by logging in through scp for secure copying
+scp (your matrix username)@matrix:/home/mark.fernandes/goodies/vim-settings.tgz .
+
+# check that the file downloaded correctly
+ls
+
+# unzip the file using tar (tar= tape archive)
+tar -xvzf vim-settings.tgz 
+
+# goto the vim-settings subdirectory created
+cd vim-settings/
+
+# list all files
+ls
+
+# read the README file through less
+less README
+
+# now check for the hidden files
+ls -a
+
+# move the hidden file .vimrc and the hidden directory .vimrc to your
+# home direcotry
+mv .vimrc ~
+mv .vim ~
+
+# (ONLY IF RUNNING AS LIVE USER)
+su
+
+# (ONLY IF RUNNING AS A LIVE USER: install gvim and say YES)
+yum install gvim
+
+# Open another tab or gnome-terminal and start gvim and enjoy :)
+gvim

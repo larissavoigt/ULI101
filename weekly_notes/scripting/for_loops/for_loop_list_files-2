@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# Display files and make copies of files in directory
+
+echo "files are..."
+
+file=
+
+for file in $(ls)
+do
+   sleep 1
+   echo $file $file.bak
+   # cp $file $file.bak
+done
+

@@ -1,0 +1,36 @@
+
+Question: How do you find all files that do not have vowels in /usr/bin?
+Answer:
+    1. cd /usr/bin
+    2. shopt -s extglob; ls +([bcdfghjklmnpqrstvwxyz])
+
+Explaination:
+
+    Goto the /usr/bin 
+    'shopt -s extglob' turns on extra wildcard matching in bash
+    'ls +([bcdfghjklmnpqrstvwxyz])' says to list all files that contain ONE OR MORE
+    of the following characters: bcdfghjklmnpqrstvwxyz
+
+
+Question: How do I find out more about the man pages on Linux
+Answer:
+    
+        man -k intro
+
+    gives you the intro page of each section in the man pages. The sections that
+    are relevant to most Linux users are in section 1 (user commands) and
+    usually section 8 (administrative commands)
+
+    To quickly see all commands in a section use the following
+
+        man -k *|grep \(1\) # which gives you all commands in the section 1
+
+        # redirect above output to a file
+        man -k *|grep \(1\) > ./man-1_user_commands 
+
+    Suggested man pages to read are
+
+        man bash
+        man find
+
+

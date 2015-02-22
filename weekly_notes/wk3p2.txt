@@ -1,0 +1,184 @@
+Filename expansion and Quoting
+==============================
+
+Filename expansion
+------------------
+
+    - certain characters have special meanings when entered, for
+      example:
+
+        '*'  means all or everything, where everything means 'zero or
+        more' So 
+
+            ls *    # show all files in the current directory
+            ls wk*  # show all files beginning with wk in the current directory
+
+        '?'  means just one character
+
+            ls ab?d # would list any four letter file that begins with
+                    # ab and ends with d
+
+        '[]' means group, and any one character in the group 
+
+            ls a[bd]c # would include: abc, adc but not ac or abbc
+
+        '[!]' means negative group so none of the characters in group
+
+            ls  a[!bd]c # includes aec but not abc or adc (see below)
+    
+
+    - So lets assume your directory has the following files:
+
+        a aac ab abbc abc ac adc aec
+
+        if you do:          ls ab*
+        this would list:    ab  abbc  abc
+
+        if you do:          ls ab?
+        this would list:    abc
+
+        if you do:          ls a?c
+        this would list:    aac abc adc aec
+
+
+        if you do:          ls a*c
+        this would list:    aac  abbc  abc  ac  adc  aec
+
+        if you do:          ls a[bd]c
+        this would list:    abc adc
+
+        if you do:          ls a[!bd]c
+        this would list:    aac aec
+
+
+        if you do:          ls a[b-e]c
+        this would list:    abc adc aec
+
+        if you do:          ls a[!b-e]c
+        this would list:    aac
+
+
+What expression would you use to get just these two files:
+
+    ab abbc
+
+Answers:
+
+    (not a good answer)
+
+    ls a*b a[b][b]c
+    ls ab abbc
+
+    (a better answer given by Claire is below but don't cheat before your try
+     yourself)
+    
+
+Quoting
+--------
+Credit: Les Czegel
+https://cs.senecac.on.ca/~les.czegel/ULI101/lectures/Lecture3.html
+
+1. Create a variable as follows (do not type the $ before
+   SCHOOL)
+
+ $ SCHOOL=Seneca
+
+ $ echo $SCHOOL
+ Seneca
+
+
+
+2. Now try to create another variable as follows (again do not type
+   the $ before mySchool)
+
+    $ mySchool=My school is $SCHOOL
+    (you get an ERROR message)
+
+3. Use weak quotes (allows spaces and expansion) as follows
+
+    $ mySchool="My school is $SCHOOL"
+
+4. echo $mySchool to see contents of mySchool
+
+    $ echo $mySchool
+    My school is Seneca
+
+5. Use strong quotes (allows spaces but DOES NOT do expansion) as follows
+
+    $ mySchool='My school is $SCHOOL'
+    
+6. echo $mySchool to see its contents
+
+    $ echo $mySchool
+    My school is $SCHOOL
+    
+
+7. Alternate method to weak quotes
+
+    $ mySchool=My\ school\ is\ $SCHOOL
+    $ echo mySchool
+    My school is Seneca
+
+8. Alternate method to strong quotes
+
+    $ mySchool=My\ school\ is\ \$SCHOOL
+    $ echo mySchool
+    My school is $SCHOOL
+
+
+Tips and Tricks
+---------------
+
+    ls -C           # list files by column
+
+    man -k count    # search man pages for topics that begin with count
+                    # numbers that appear in () are section commands
+                    # so all section (1) are for regular users whereas
+                    # topics in section (3) are for developers 
+                    # and topics in section (8) are for administrators (root)
+                    # see also man -k intro 
+
+    All files in /bin and /usr/bin are very important. You should know
+    all of them. Generally files with fewer characters are more
+    important than those with more characters as UNIX people are lazy
+    typists. Use the man pages on each command to learn more about
+    command.
+
+Practice questions
+------------------
+
+    1. How many files in /usr/bin?
+    2. Which letter of the alphabet do most files in /usr/bin begin with?
+    3. Which letter of the alphabet do most files in /usr/bin end with?
+
+    4a. In /usr/bin how many files with two letters exist? 
+    4b. In /usr/bin how many files with three letters exist? 
+    4c. In /usr/bin how many files with four letters exist? 
+
+    5.  In /usr/bin how many files do not have any vowels in them? A
+        vowel is 'a' 'e' 'i' 'o' 'u' 
+
+    6. How many sections are there in the man pages? Which section
+       does each  number represent?
+
+
+    7. Given the following set of files:
+
+a  a1c  aac  ab  abbc  abc  aBc  ac  a_c  aCc  adc  aec  aZc
+
+    what does:
+
+        ls a[a-z]c
+        ls a[!a-z]c
+        ls a[A-Z]c
+
+    match and why
+
+
+--x--
+
+* Answer by Claire to the question above uses 'brace expansion'
+
+  ls ab{,bc}
+
+  { } is brace expansion, which allows you to specify one or more files. 

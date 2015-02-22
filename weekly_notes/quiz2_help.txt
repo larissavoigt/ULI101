@@ -1,0 +1,30 @@
+
+
+1. Problem: Cannot create directory in /var
+   Solution: Become superuser (to create a directory in /var) like this:
+
+    su
+  
+   Notice your prompt changes form
+        $
+   to
+        #
+
+2. Problem: Cannot create user lisa
+   Solution: As superuser, create a user lisa like this
+
+        # useradd lisa
+
+3. Problem: From centos user howto become user lisa
+   Solution: Use su followed by username
+        su lisa
+
+
+4. Problem: I cannot see the directory tree in CentOS Live CD/DVD
+   Solution: As superuser (su) run yum install
+    
+    yum install tree
+
+
+
+        

@@ -1,0 +1,22 @@
+
+set|/usr/bin/grep -we "^NAME"
+NAME=uli101
+echo $NAME
+
+uli101
+NAME=
+echo $NAME
+
+set|/usr/bin/grep -we "^NAME"
+NAME=
+unset NAME 
+echo $NAME
+
+set|/usr/bin/grep -we "^NAME"
+NAME="uli101"
+set|/usr/bin/grep -we "^NAME"
+NAME=uli101
+echo $NAME
+uli101
+
+

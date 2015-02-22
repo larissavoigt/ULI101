@@ -1,0 +1,17 @@
+#!/bin/bash
+
+INDEX=1
+
+if [ $# -lt 2 ]
+then
+    echo "script needs at least two arguments" >&2
+    exit 1
+else
+    echo '$*'=$*
+    for arg in $*
+    do
+        echo '$'$INDEX=$arg
+        INDEX=$((INDEX+1))
+    done
+fi
+

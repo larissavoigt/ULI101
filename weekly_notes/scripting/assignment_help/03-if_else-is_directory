@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# if "$1" zero length (meaning is $1 an empty string)
+if [ -z "$1" ]
+then
+    echo Usage: script requires at least one argument >& 2
+    exit 1
+fi
+
+# if "$1" not a directory (! means not, -d is directory)
+if [ ! -d "$1" ]
+then
+      echo The first argument $1 is not a directory >&2
+      exit 1
+else
+      echo  "$1" is a directory
+fi

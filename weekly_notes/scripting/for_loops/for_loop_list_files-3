@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Display files and make copies of files not ending in .bak in directory
+
+echo -n "checking..."
+
+ls | grep -v "\.bak" > /dev/null
+
+if [ $? -eq 0 ]
+then
+    echo "there are files to backup, they are..."
+else
+    echo "No files to backup. Goodbye"
+    exit
+fi
+
+file=
+
+for file in $(ls * | grep -v "\.bak")
+do
+   sleep 1
+   echo $file $file.bak
+   # cp $file $file.bak
+done
+
+

@@ -1,0 +1,20 @@
+set|/usr/bin/grep -we "^NAME"
+NAME=uli101
+
+echo $NAME 
+uli101
+NAME=        
+set|/usr/bin/grep -we "^NAME"
+NAME=
+echo $NAME
+
+unset NAME
+set|/usr/bin/grep -we "^NAME"
+echo $NAME
+
+read -p "What's your name? " NAME
+What's your name? uli101
+echo $NAME
+uli101
+set|/usr/bin/grep -we "^NAME"
+NAME=uli101

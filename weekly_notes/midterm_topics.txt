@@ -1,0 +1,89 @@
+Week 6: Review of First Half of the Semester
+---------------------------------------------
+
+List of utilities that you will need to know in ULI101
+---------------------------------------------------------
+
+    * File management
+
+     - list files: ls: -1 (one) -l (lower L) -d -a -C
+
+     - copy files: cp, scp, sftp. 
+            cp [from] [to]
+     
+     - move/rename files: mv: -i
+            mv [from] [to]
+
+     - create directories: mkdir: -p 
+     
+     - remove files: rm: -r -f
+     
+     - remove directories: rmdir, rm -rf
+
+     - list permissions: ls -l (ls -ld)
+
+     - change permissions: chmod 
+            chmod (octal number for user/group/others)
+            chmod (+-= rwx ugo)
+
+     - change ownership: chown
+
+     - search for files: find
+            find (location to search) (find options)
+
+    * Text Editing
+
+     - create files: touch, vi/gvim, cat, echo
+     - edit files: vi/gvim/ed 
+     - display file contents: cat: -n
+ 
+    * Getting Help
+
+     - man pages: man: -k
+     - info database: info (CTRL+Q,CTRL+C)
+     - html/pdf documents: typically with /usr/share/doc
+
+Absolute and relative pathnames
+-------------------------------
+
+    * absolute pathnames ALWAYS begin with /
+    * relative pathnames NEVER begin with / and pathname is relative to the
+        1current working directory
+
+        .  present directory
+        .. parent directory
+        ~  home directory 
+        [anything else other than /] directory/file name
+    
+
+Wildcards and shell expansion
+-----------------------------
+
+    * Using wildcards to get files: *,?,[],!
+    * Extending globbing with bash see file:
+            
+            /home/mark.fernandes/uli101/weekly_notes/tricky_globbing.txt
+
+    * Difference between single and double quotes
+
+Data Representation
+--------------------
+
+    * HOWTO convert between decimal and bin/oct/hex
+        (hint: use math to convert)
+
+    * HOWTO convert between bin/oct/hex and oct/hex/bin, hex/oct/bin, etc.
+        (hint: draw the table for numbers: 0-15)
+
+
+
+Live CD
+-------
+
+    * using ssh/scp/sftp to connect and transfer files remotely
+    * get/put files local (when running LIVE CD)  and remote (matrix)
+    * decompressing tar,gz,tgz files with tar: -xvzf
+    * running superuser commands with the live CD
+
+
+

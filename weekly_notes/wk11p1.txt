@@ -1,0 +1,193 @@
+sed and awk 
+-----------
+
+- Many of the notes in this file have been taken from Les Czegel's
+  notes on vi,sed and awk. See 
+  
+  https://scs.senecac.on.ca/~les.czegel/ULI101/lectures/Lecture11.html
+
+- sed gets its name from (s)tream (ed)itor. sed is a filter like grep
+  but it sed is much more powerful and flexible with how it filter's
+  data. The default action of sed is to print, this default can be
+  suppressed with the '-n' option of sed.
+
+- awk is a filter and a formatter, and is named after the programmers
+  who wrote the command (A. Aho, P. Weinberger and B. Kernighan). AWK
+  is a formatter (known as pretty printing).
+
+- So if you want to create reports use awk otherwise for simple
+  filtering use sed.
+
+sed
+---
+
+The rule for sed is a follows
+
+    sed 'address instruction' filename
+
+so for example to print (p) the second line of cars use
+
+    sed '2 p' cars
+
+Did you notice what happens? Now try
+
+    sed -n '2 p' cars
+
+What is the difference? The second line is repeated when '-n' option
+is not used, but using '-n' only prints what we want printed.
+
+This means the default behaviour or sed is to print. So to print only
+what we say we want, we use '-n'. Now try the following:
+
+    sed -n '4,6 p' cars                 # using a line no range (4,6)
+    sed -n '/ford/ p' cars              # using a literal (/ford/)
+    sed -n '/50$/ p' cars               # using a regex (/50$/)
+    sed -n '/ [a-z][a-z] / p' cars      # using regex (/ [a-z][a-z] /)
+
+
+Let us now try d for delete. What is the difference between these two
+options
+
+    sed -n '/ford/ p' cars
+    sed    '/ford/ d' cars
+
+Notice there is no '-n' in the second example.
+
+
+Let us now try q for quit. The quit command takes an address (cannot
+be a range) or a regular expression
+
+    sed '2 q' cars
+
+will print the first two lines and quit
+
+    sed '/80/ q' cars
+
+will print till match for 80 appears on line. Then it quits. If 80 is
+not found anywhere the entire file will be printed.
+
+Let us now try the s for substitute. The s option takes an expression
+to find followed by an expression to replace.
+
+
+    sed 's/ford/mazd/' cars
+
+replaces all ford with mazd. To understand the s option in sed, try
+the following:
+
+    echo this
+    echo this|sed 's/this/that/'
+    echo this is this|sed 's/this/that/'
+    echo this is this|sed 's/this/that/g'
+
+
+sed 
+
+    * behaving like grep:
+
+        grep "ford" cars
+        sed -n '/ford/ p' cars
+
+    * behaving like cat:
+
+        cat cars
+        sed '' cars
+
+    * behaving like head:
+
+        head cars
+        sed -n '1,10 p' cars
+
+    * (NOT PART OF ULI101) behaving like tail:
+
+        tail cars
+        sed -e :a -e '$q;N;11,$D;ba'
+
+see: http://unix.stackexchange.com/questions/107387/emulate-tail-with-sed
+
+sed questions to try:
+
+    1.  Get all honda cars.
+    2.  Get all cars that are not chevy (or Chevy)
+    3.  Get all cars that are from the 80's i.e. 80-89 (third field)
+    4.  Get all cars that are not from the 80's (third field)
+
+    5.  Quit on line number 4. How many lines display? Why?
+    6.  Quit on the first match for ford? How many lines display? Why?
+    7.  Quit on the first match for bmw? How many lines display? Why?
+    8.  Replace all 65 with 75.
+    9.  Replace all chevy or Chevy with GM? What happens? Why?
+    10. Replace all chevy or Chevy with GM but ensure that formatting
+        does not get affected.
+
+    11. Replace '0' with '.' What happens? Why?
+    12. Replace ALL '0' with '.' 
+    
+
+
+
+awk
+---
+
+The rule for awk is:
+
+    awk 'pattern {action}' filename
+
+The default action is print. Like sed, awk, can be used to filter
+also. Try:
+
+    # print entire line
+    awk 'NR == 2' cars
+    awk 'NR == 2, NR == 4' cars
+
+    awk '/50$/' cars
+    awk '$3 > 70' cars
+    awk '$3 >= 70 && $3 <= 80' cars
+
+    # print specific fields only
+    awk '/50$/ {print $1}' cars
+    awk '$5 > 1000 && $5 < 10000 {print $5,$1}' cars
+    
+Using a field separator for awk
+
+    # print only the first field in /etc/passwd
+    awk -F':' '{ print $1}' /etc/passwd
+
+    # print all fields that match product code 96 (second field) in
+    # file inventory
+    awk -F',' '$2 == 96' inventory
+
+
+awk questions to try:
+
+    1. Get all cars that are not chevy (or Chevy)
+    2. Print all models with zero to four letter models (second field). So
+        gl,ltd,nova, 600 etc would be matches. Print model names only
+
+    3. Print all cars that are less than  100 km (fourth field)
+    4. Print all cars that cost more than 10k (fifth field). Only
+       print car manufacturer and price.
+
+    5. In /etc/passwd, display on the first field and the last field (6).
+    6. In file inventory, print all records where $3 is greater than 1000
+    7. In file inventory, print all first fields 
+
+    8. Find the longest no-vowel word in /usr/share/dict/words
+    9. Using 
+         
+         ypcat passwd
+
+        What is the most popular last name of all matrix users?
+
+
+Advanced answers
+--------------------
+Q2)
+ awk '/[a-z] * ([a-z][a-z]|[a-z0-9][a-z0-9][a-z0-9]|[a-z][a-z][a-z][a-z]) /' cars
+ awk ' length($2) <=4 ' cars
+ awk '!/ [a-z][a-z][a-z][a-z][a-z][a-z]* /' cars
+ awk '$2 ~ /^.{0,4}$/' cars
+ awk '$2 !~ /^......*$/' cars
+
+
+

@@ -1,0 +1,11 @@
+Question
+--------
+
+What commands will you use to find each of the following:
+
+    - were changed in the last 24hrs
+    - are larger than 10MB
+
+
+How many system commands are there in the man pages (section 8). List
+all of them on one line.

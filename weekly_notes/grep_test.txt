@@ -1,0 +1,27 @@
+This file is used to test output of grep
+----------------------------------------
+Use with grep "net" and options
+-c : for count
+-e : for regular expressions
+-i : for ignore case
+-w : for word boundary
+-v : all but, reverse
+
+Notice the word net appears as a standalone word, or at the start of
+word, of at the end of a word, or in the middle of the word. The list
+below has both all lower case and upper case versions
+
+annette
+internet
+magnetic
+net
+network
+
+Annette
+MAGNetic
+Net
+Network
+Internet
+
+
+nEt

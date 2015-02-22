@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# A simple countdown timer
+
+echo -n "Countdown..."
+
+counter=
+
+for counter in 3 2 1 "Blast Off"
+do
+   sleep 1
+   echo -n $counter " " 
+done
+
+echo 

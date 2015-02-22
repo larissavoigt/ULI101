@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# ask user for their name
+read -p "What is your name? " NAME
+
+# show custom message to user
+echo "Hello $NAME from OPS105 scripting"
+

@@ -1,0 +1,56 @@
+Question
+--------
+Create a link to the backup directory in documents and call the link backup.
+
+
+Answer:
+
+You are asked to do the following
+    - (the link target is to directory) backup
+    - (link location is in directory)   documents
+    - (link name is )                   backup
+    - (your PWD is)                     school
+
+links/uli101/work/midterm_green/
+├── backup
+│   └── documents.tar.gz
+├── documents                   link name 'backup' points to location ../backup
+│   ├── private
+│   │   └── finances.csv
+│   ├── quote.txt
+│   ├── school                  <= You are here (.. is documents, so ../backup)
+│   │   └── uli101
+│   └── summary.odp
+└── tmp
+    └── xyz.tmp
+
+based on PWD of school, your answer on the command line is
+ln -s   ../backup ../backup
+ (soft) (target)  (location relative to pwd with link name)  
+
+
+Hard links
+----------
+
+Hard links create 'live' backups to files
+- if content of original file changes then backup file changes too
+- ls -l shows the number of hard links to a file, 
+- increases by one each time a hard link is added with ln
+- decreases by one each time a hard link file is removed by rm
+- only root can create hard links to directories
+
+
+example
+$ touch hello                   # create empty file hello
+$ echo "Hello World" >> hello   # add some content to it
+$ ln hello hello.backup         # create hard link called hello.backup
+$ ls -l                         # note that link number shows 2 (up by 1)
+$ rm hello                      # remove original file
+$ cat hello.backup              # hard link has content from original file
+
+
+
+
+
+
+

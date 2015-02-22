@@ -1,0 +1,140 @@
+BASH Scripting 101
+-------------------
+
+The four fundamental steps when learning scripting are as follows:
+
+    1. Display something on the screen.
+    2. Get input from user and display that input back to the screen
+    3. Get input, take a decision on input and display results
+       accordingly
+    4. To do repetition till a decided end point is reached
+
+
+This file is available from: 
+
+/home/mark.fernandes/uli101/weekly_notes/scripting/scripting_101.txt
+
+
+Step 1: Setting up your PATH environment variable
+-------------------------------------------------
+
+- Begin your scripting life by creating directory to hold your scripts. Lets call
+  that direcory 'bin' and we are going to put that 'bin' directory into our path. So
+  (before adding bin to the path):
+
+$ echo $PATH 
+/home/unx122/bin:.:/home/uli101/bin:.:/home/ops435/bin:.:/usr/lib/mpi/gcc/openmpi/bin:/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/X11R6/bin:/usr/games:/opt/kde3/bin:/opt/cross/bin:/usr/lib/jvm/jre/bin:/bin:/usr/java/jdk/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/oracle/10.2.0.1.0/bin:/usr/lib/qt3/bin:/opt/real/RealPlayer:
+
+Now edit the ~/.bashrc file: 
+$ vi ~/.bashrc
+
+and add the following line:
+PATH=$PATH:~/bin
+
+save the .bashrc file and exit. Now open another terminal and do the following:
+
+$ echo $PATH
+/home/unx122/bin:.:/home/uli101/bin:.:/home/ops435/bin:.:/usr/lib/mpi/gcc/openmpi/bin:/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/X11R6/bin:/usr/games:/opt/kde3/bin:/opt/cross/bin:/usr/lib/jvm/jre/bin:/bin:/usr/java/jdk/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/oracle/10.2.0.1.0/bin:/usr/lib/qt3/bin:/opt/real/RealPlayer:/home/mark.fernandes/bin
+
+
+Step 2: Your very first bash script
+-----------------------------------
+- Create a file called 'hello.bash' in your 'bin' directory.
+- Copy the following script in that file:
+
+....SCRIPT BEGINS BELOW THIS LINE.......
+#!/bin/bash
+
+# say hello 
+echo "Hello BASH"
+....SCRIPT ENDS ABOVE THIS LINE....
+
+- Now got to the bin directory and give the following command
+$ chmod 750 hello.bash
+
+- Now run the file using the following command
+$ ./hello.bash
+
+- You should see the following line:
+Hello BASH
+
+- Try and run the file from another location using the following command:
+$ ~/bin/hello.bash
+
+- Or if your PATH environment is correct then simply using the script name is enough
+$ hello.bash
+
+
+Step 3: Troubleshooting (in case something goes wrong)
+------------------------------------------------------
+- Did you write the script correctly.
+- Did you set the permissions to the script correctly (note the filename on the
+  chmod line should be the same as the script filename). Scripts need the read
+  and execute permissions to work. At the minimum you need to give it read and
+  execute permissions for user like so:
+
+    chmod u+rx hello.bash
+
+- Are you running the right script file (either the path or the script filename
+  maybe incorrect).
+- Did you set the PATH environment correctly, and if so have you opened a new
+  termninal window.
+
+
+Step 4: Your first interactive script
+-------------------------------------
+- Create a file called 'hello-interactive.bash' in your 'bin' directory.
+- Copy the following script in that file:
+
+....SCRIPT BEGINS BELOW THIS LINE.......
+#!/bin/bash
+#-------------------------------------------
+# Filename  : hello-interactive.bash
+# By        : MF
+# Purpose   : to show interactive scripting
+#-------------------------------------------
+
+# make a variable called NAME, and initialize it to nothing
+NAME=
+
+# Ask the user for their name
+read -p "What is your name? " NAME
+echo "Hello $NAME"
+
+....SCRIPT ENDS ABOVE THIS LINE....
+
+- Now got to the bin directory and give the following command
+$ chmod 750 hello-interactive.bash
+
+- Now run the file using the following command
+$ ./hello-interactive.bash
+
+- You should see the following line:
+What is your name?
+
+- When you enter something it will display what you entered, assume I entered Mark,
+  the script should show me:
+$ Hello Mark.
+
+- Try and run the file from another location using the following command:
+$ ~/bin/hello-interactive.bash
+
+- Or if your PATH environment is correct then simply using the script name is enough
+$ hello-interactive.bash
+
+Step 5: Additional help
+------------------------
+
+- Help is, usually, available at two locations:
+$ man bash
+$ man bashbuiltins
+
+- Alternatively you can get help online from:
+
+http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html
+
+or advanced help is at:
+
+HTML:   http://tldp.org/LDP/abs/html/
+PDF:    tldp.org/LDP/abs/abs-guide.pdf
+

@@ -1,0 +1,44 @@
+#!/bin/bash
+#---
+#
+# creates a tree structure used in some ULI101 midterm, quizzes, and exams.
+#
+
+id -u brian 2> /dev/null
+if [ $? -eq 1 ]
+then
+    useradd -G users brian 2>/dev/null 
+else  
+	echo user brian exists...quitting. You might want to try \'userdel -r brian\' first. 
+	echo !!!WARNING!!! DO NOT USE if your name is brian as \'userdel -r brian\' DELETES EVERYTHING in /home/brian 
+	echo ....but this should be OK if you are running this script from a live DVD/USB
+	exit 1 ;
+fi
+
+id -u lisa 2> /dev/null
+if [ $? -eq 1 ] 
+then
+    useradd -G users lisa 2>/dev/null 
+else 
+	echo user lisa exists...quitting. You might want to try \'userdel -r lisa\' first. 
+	echo !!!WARNING!!! DO NOT USE if your name is lisa as \'userdel -r lisa\' DELETES EVERYTHING in /home/lisa 
+	echo ....but this should be OK if you are running this script from a live DVD/USB
+	exit 1 ;
+fi
+
+mkdir -p /var/{ftp/public,ftp/upload,www/html,www/cgi-bin}\
+	 /home/{brian/archive,brian/docs,lisa/documents}\
+	 /tmp/{logs,builds}\
+	 /shared/{sales,mkt/docs,mkt/docs2012}
+
+touch /var/ftp/public/file1 /var/ftp/upload/{file2,file3} /var/www/html/{file4,file5} /var/www/cgi-bin/{file6,file7}\
+	/home/brian/docs/file8 /home/lisa/{file9,documents/file10}\
+	/tmp/logs/file11 /tmp/builds/file12\
+	/shared/sales/file13 /shared/mkt/docs/{file14,file15,file16} /shared/mkt/docs2012/file17
+
+
+chown -R lisa:users ~lisa
+chown -R brian:users ~brian
+chown -R :users /shared
+chown -R :users /var/www
+chown -R :users /var/ftp

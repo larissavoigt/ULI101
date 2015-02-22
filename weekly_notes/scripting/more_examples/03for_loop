@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# ULI101:       script 4 - loop
+# Script name:  for_loop
+# Purpose:      a HOWTO for a for loop
+
+# create variable and leave empty
+COUNTDOWN=
+
+echo -n "SpaceX ready for take off..."
+
+# for each item in list (3,2,1,BLAST OFF!!!) copy to variable
+for COUNTDOWN in 3 2 1 "BLAST OFF!!!"
+do
+    # sleep for 1 (one) second and then echo value
+    sleep 1
+    echo -n $COUNTDOWN " "
+done
+
+# last echo for proper exit otherwise script ends midway 
+# on the command line
+echo

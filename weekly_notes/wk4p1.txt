@@ -1,0 +1,196 @@
+Data Representation
+------------------
+
+The number systems that we deal with in computers are:
+
+Decimal: comes from 'deca', which means 10 unique symbols namely: 
+    0 1 2 3 4 5 6 7 8 9
+ 
+    so decimal is base 10 which is what we are used to.
+
+Binary: comes from 'bi', which is 2 so there are two symbols.
+    0 1
+
+Octal: comes from 'octa', which is 8 so there are eight unique symbols
+    0 1 2 3 4 5 6 7 
+
+Hexadecimal: comes from 'hexa', which is 16 so there are 16 unique symbols
+    0 1 2 3 4 5 6 7 8 9 A B C D E F
+
+
+Converting between various number systems
+
+Dec     Bin     Oct  Hex   Permissions (Read/Write/eXecute)
+                            rwx
+
+ 0        0     0     0      ---           
+ 1        1     1     1      --x
+ 2       10     2     2      -w-
+ 3       11     3     3      -wx
+ 4      100     4     4      r--
+ 5      101     5     5      r-x
+ 6      110     6     6      rw-
+ 7      111     7     7      rwx
+
+ 8     1000    10     8
+ 9     1001    11     9
+ 10    1010    12     A
+ 11    1011    13     B
+ 12    1100    14     C
+ 13    1101    15     D
+ 14    1110    16     E
+ 15    1111    17     F
+
+HOWTO convert from
+------------------
+
+* Decimal to Binary
+
+    example: What is decimal number 49 in binary
+    Answer:
+                                    1  1 0 0 0 1
+     powers of 2^n where n>=0:  64 32 16 8 4 2 1
+        so:
+            49 is between 64 and 32 that is why 1 is put above 32
+            next 49-32= 17 which is between 32 and 16 so 1 is above 16
+            next 17-16= 1  so 1 is above 1
+            finally put zeros everywhere else you now have
+                
+                49 => 1 1 0 0 0 1 
+
+    So
+     Decimal => Binary
+          49 => 110001
+
+* Binary to Decimal
+
+    example: What is binary number 111001 in decimal
+    Answer:
+
+            111001 =  1  1 1 0 0 1
+                     32 16 8 4 2 1 
+
+                     32+16+8+1 = 57
+
+    So
+      Binary  => Decimal
+       111001 => 57
+
+* Binary to Octal 
+    
+    example: What is 111001 (57 decimal) in octal
+    Answer:
+
+            Binary number grouped by 3 111001 =  111 001
+            Look at the above table           =   7   1
+
+    So 
+        Binary => Octal
+        111001 => 71
+
+
+* Octal to Binary
+    
+    example: What is 37 octal in binary
+    Answer:
+        
+            Octal number:  37  =     3  7
+            Look at above table=    011 111
+
+    So 
+        Octal => Binary 
+           37 => 011 111 or 11111
+
+    
+
+* Hexadecimal to Octal
+
+    example: What is 1F hexadecimal in octal
+    Answer:
+
+        first convert hex to binary so looking at the above table
+
+                1F = 0001 1111
+
+        next group by 3
+            
+                1F =  0001 1111 = 00 011 111
+
+        look at the above table to convert to octal
+
+                00 011 111 = 37
+
+    So
+        Hexadecimal => Octal
+                1F  => 37
+
+* Octal to Hexadecimal
+
+    example:    What is 43 octal in hexadecimal
+    Answer:
+            
+        first convert octal to binary so looking at the above table
+
+                43 = 100 110
+
+        next group by 4 
+            
+                43 = 100 110 = 10  0110
+
+        look at the above table to convert to hex
+        
+                10 0110 = 2 3
+
+        So
+            Octal => Hexadecimal
+               43 => 23 
+
+
+Use 
+    
+    chmod (octal number) (file/dir)     # set permissions using octal
+
+
+Symbolic and Octal notations for chmod
+---------------------------------------
+
+- octal notation is a series of 3 octal numbers representing user,
+  group and others. For example:
+
+    755 = read,write,execute to user; read,execute to group and others
+    640 = read,write to user; read to group, none to others
+
+- symbolic notation is
+
+    u,g,o,a for user, group, others and all
+    + to add perms (r,w,x)
+    - to remove perms (r,w,x)
+    = to set perms (r,w,x)
+
+    for example:
+
+    chmod u+rwx,g-w,o= means user gets all, remove write from group,
+    and set nothing to others.
+
+- umask is used to affect permissions of new files and directories,
+  try doing this:
+
+    $ umask
+    (see the value you get)
+
+    now change umask to deny all permissions to group and others, then
+    create a new file and directory to verify that the newly created
+    files and directories denied permissions to group and others.
+
+
+Tips
+------
+
+- (Not part of ULI101 course) Use screen to multi-task with different
+  windows open. For more help you are advised to look at help online,
+  or read the man page for screen:
+
+    man screen
+
+
+# vim: tw=70

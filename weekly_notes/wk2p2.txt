@@ -1,0 +1,124 @@
+Week 2 Period 2
+---------------
+
+List of commands used so far
+----------------------------
+
+Begin by creating a 'rough_work' directory, as shown below ($ indicates shell
+prompt)
+
+$ cd
+$ mkdir uli101
+$ cd uli101
+$ pwd
+/home/mark.fernandes/uli101
+
+$ mkdir rough_work
+$ cd rough_work
+$ pwd
+/home/mark.fernandes/uli101/rough_work
+
+Now you can continue as shown in the examples below
+
+
+File management commands
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+All of file management stuff falls under the four sub headings:
+
+1. C: create
+    * to create a file use: touch, or a text editor like vi
+    * for example ($ indicates shell prompt):
+
+       $ touch file
+
+2. R: read (view/look)
+    * to look through a file you can use: less, cat
+    * for example ($ indicates shell prompt):
+
+       $ less file
+       $ cat file
+
+    (since there is nothing in the file you will not see anything)
+
+
+3. U: update (copy/move/rename)
+    * to copy a file use: cp
+    * for example ($ indicates shell prompt):
+
+        $ cp file file1
+        $ cp file1 file11
+        $ ls
+        file file1 file11
+
+    * to move a file use: mv
+
+        $ mv file* a
+        mv: target `a' is not a directory
+        $ mkdir a
+        $ mv file* a
+        $ tree
+        .
+        └── a
+            ├── file
+            ├── file1
+            └── file11
+
+        1 directory, 3 files
+        
+    * to rename a file use: mv
+
+        $ cp a/* .
+        $ ls
+        a  file  file1  file11
+        $ mv file1 file4
+        $ mv file11 file44
+        $ ls
+        a  file  file4  file44
+
+
+4. D: delete
+    * to delete a file use: rm
+
+Directory management commands
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. C: create
+    * to create a directory use: mkdir 
+
+2. R: read (view/look)
+    * to look through a directory you can use: ls, echo
+    
+
+3. U: update (copy/move/rename)
+    * to copy a directory use: cp
+    * to move a directory use: mv
+    * to rename a directory use: mv
+
+4. D: delete
+    * to delete an empty directory use: rmdir
+    * to delete a non-empty directory use: rm -r
+
+
+List of symbols used thus far
+-----------------------------
+
+    *   all files (in shell globbing)
+    ?   any character (in shell globbing)
+    .   current directory
+    ..  parent directory 
+    ~   home directory
+    /   root directory, and path separator
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for animal in lion tiger bear
+do
+   echo $animal
+done

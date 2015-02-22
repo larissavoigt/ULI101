@@ -1,0 +1,166 @@
+Important topics for exam
+-------------------------
+
+- Everything in the midterm_topics list in file:
+
+    /home/mark.fernandes/uli101/weekly_notes/midterm_topics.txt
+
+- Understand absolute and relative pathnames.
+
+    * Absolute paths always begin with /
+    * Relative paths DO NOT begin with /
+        a) if a relative path begins with letters or numbers it means in the pwd
+        b) if a relative path begins with . it means the pwd (same as option a above)
+        c) if a relative path begins with .. it means the parent directory relative to pwd
+        d) if a relative path begins with ~ it means relative-to-home of currently logged in user
+        e) if a relative path begins with ~ but followed by letters it means relative-to-home of that user
+
+    * so compate the two paths of ~ used with uli101 below
+        NOTE: $USER is currently logged in user which changes for every user in the system
+        ~/uli01/somefile effectively means /home/$USER/uli101/somefile 
+      
+        NOTE: the path shown below NEVER CHANGES for any user on that system
+       ~uli101/somefile effectively means /home/uli101/somefile
+
+- redo the labs and assignments (but do not submit them again). You
+  can redo the labs and assignments as many times as you like.
+
+- vi commands (searches,movement,editing:changes,inserts,deletes)
+- unix commands:
+
+    * common linux commands: head,tail,cut,sort,diff,tr,wc,grep,sed,awk
+    * remember the delimiter options for:
+        - cut uses -d for delimiter (use strong quotes) like cut -d';'
+        - sort uses -t for delimiter e.g. sort -t','
+        - awk uses -F for delimiter e.g. awk -F':'
+
+    * What are stdin (0), stdout (1), stderr (2)
+
+        <   input redirection
+        >   output redirection
+        >>  append
+
+        echo "Hello" > file
+        cat < some_file
+        echo ' World!' >> file
+
+        cat < file > file2
+        cat < file2 > file3 >&2
+
+        cat file2 > /dev/null
+        cat file3 
+        
+        cat file | tee file4
+    
+    * What does it mean to redirect output, what are pipes in UNIX?
+    * What is /dev/null file and how do you use it? 
+
+- Regular expressions basics:
+
+    * say your prayers...all right, I'm joking :)
+    * match character classes ([],[^]) like know how to get lower case/upper case
+        
+        [0-9] matches any one number from 0 to 9
+        [^0-9] does not match a number
+        [a-z] matches any one lower case from a to z
+        [^A-Z] does not match any upper case
+
+     .  in regular expressions means any (one) character
+     * in regular expressions mean zero or more of preceding character(look at the character just before it)
+
+        [0-9]*  means zero or more numbers so
+        
+    Testing with grep
+
+        echo  abc|grep "[0-9]*" 
+        echo $? 
+    
+        echo abc|grep "[0-9]"
+        echo $?
+        
+    Testing with sed
+        echo abc|sed -n  '/[0-9]*/ p'
+        echo abc|sed -n  '/[0-9]/ p' 
+
+        echo abc|sed  '/[0-9]/ d'
+        echo abc|sed  '/[0-9]/ d'
+
+    
+    Try this, create a file data with the following 7 lines of data
+sand
+gold
+sand
+
+tea
+tea leaves
+tea
+
+golden tea
+
+    Now to get only gold try
+        sed -n '/gold/ p' data
+
+    but that will return 
+        gold
+        golden tea
+
+    so use
+        sed -n '/gold$/ p' data
+    that returns
+        gold
+
+    But to get only tea, we have to do the following two steps
+        sed -n '/^tea/ p' data|sed '/leaves/ d'
+    or
+        sed -n '/^tea$/ p' data
+    
+
+    Similarly to get all lines with four letters we use
+
+        sed -n '/^....$/ p' data
+
+
+    * what are wildcard (? and *) characters, be sure that you know:
+        - what wildcards are used for command line stuff: (ls, grep)
+        - what wildcards are used for UNIX commands like: (tr, grep, sed)
+        - what wildcards are used in vi
+
+Shell wildcards
+    
+    touch  abc     abc5    abcd    abc.     abc.txt
+
+So 
+                abc     abc5    abcd    abc.    abc.txt
+
+ls  abc?        No      Yes     Yes     Yes     No
+ls  abc*        Yes     Yes     Yes     Yes     Yes
+ls  abc.        No      No      No      Yes     No
+ls  abc.*       No      No      No      Yes     Yes
+ls  abc{,.txt}  Yes     No      No      No      Yes
+ls  abc{.,.txt} No      No      No      Yes     Yes 
+ls  abc{?,.txt} No      Yes     Yes     Yes     Yes
+ls  abc{,.,?}   Yes     Yes     Yes     Yes     No
+ls  abc[5.]     No      Yes     No      Yes     No
+ls  abc[^5.]    No      No      Yes     No      No
+    
+
+    * what are the repetition symbols({},*) for commandline, unix commands, vi what
+    * what are anchors: (^,$)
+    * know the difference between basic regular and extended regular expressions.
+    * extended regular expressions using group operators, using the or operator: (|)
+    
+
+- how to filter with  grep/egrep and sed
+- how to do search and replace in vi
+
+
+- Basics of bash scripting
+    * what are the shell startup and support files and their purpose
+    * how to interact with the shell history
+    * how to use alias statement
+    * what are the different shell Variables
+    * what are the shell positional parameters
+    * how to use echo and read commands
+    * control statements: if and test
+    * loops: for
+

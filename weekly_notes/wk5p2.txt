@@ -1,0 +1,166 @@
+Commands
+---------
+
+For all the commands to work below goto the Linux Source Code directory on
+matrix:
+    cd /usr/src/linux
+
+
+LINE, WORD, BYTE TOTALS
+-------------------------
+Check out the number of bytes
+    ls -l README    # long listing shows bytes
+    ls -lh README   # h shows human readable format
+    
+    wc README       # word count shows lines, words, bytes
+    wc -l README    # lines
+    wc -w README    # words
+
+
+
+THE g/RE/p (grep) FILTER
+-------------------------
+
+The grep filter prints all lines that match the search criteria, from
+the given text. In other words if you want to search for the word "Linux" in
+the file README use the following commands.
+
+# show all lines containing the word "Linux"
+/usr/bin/grep -w "Linux" README
+
+# show all lines that *DO NOT* contain the word "Linux" 
+/usr/bin/grep -wve "Linux" README
+
+# counts the number of "Linux" word occurrences (case-sensitive)
+/usr/bin/grep -w "Linux" README|wc -1
+/usr/bin/grep -wc "Linux" README    # same as above
+
+# so lines that match and lines that *DO NOT* match should total the number of
+# lines in README
+wc -l README
+
+# counts number of case-insensitive "Linux" word occurrences
+/usr/bin/grep -wi "Linux" README|wc -1
+/usr/bin/grep -wic "Linux" README
+
+
+Common grep options
+
+ -c : count
+ -e : expression
+ -i : ignore case
+ -v : negate search
+ -w : word boundary (full word search)
+
+# count all lines that match net
+grep -c net README
+2
+
+# count all lines that match case-insensitive net
+grep -ic net README
+3
+
+# count all lines that match net (word-boundary)
+grep -cw net README
+0
+
+
+# count all lines that match case-insensitive net (word-boundary)
+grep -cwi net README
+1
+
+ to understand what it is above, remove -c and observe the output that
+ is try the following commands
+
+    grep      net README
+    grep -i   net README
+    grep -w   net README
+    grep -wi  net README
+    
+
+
+Practice Yourself
+-----------------
+
+# what do these commands do?
+wc README
+/usr/bin/grep -icve "Linux" README
+/usr/bin/grep -ic "Linux" README
+
+
+
+OUTPUT REDIRECTION
+--------------------
+# find all filenames containing the word ssh in /etc
+find /etc -name sshd\*
+or
+find /etc -name "sshd*"
+or
+find /etc -name 'sshd*'
+
+
+# find all filenames containing the word ssh in /etc 
+# but redirect all errors to /dev/null
+find /etc -name sshd\* 2> /dev/null
+find /etc -name "sshd*" 2> /dev/null
+find /etc -name 'sshd*' 2> /dev/null
+
+# get all files in /etc - save output to sshd_files
+# redirect errors to find_errors
+find /etc -name sshd\* 1> sshd_files  2> find_errors
+or 
+find /etc -name sshd\* > sshd_files  2> find_errors
+
+# Redirects stderr to stdout
+find /etc -name sshd\* 2>&1 
+
+# redirect all output and error output to sshd_and_find_errors 
+find /etc -name sshd\* > sshd_and_find_errors 2>&1
+
+
+The tee utility
+----------------
+The tee utility saves the input data to a file and sends the input data onward
+to the next utility, for example, in the line shown below - the tee utility
+sends the long listing of ls to a file 'unsorted' and sends the long listing
+to the sort utility
+
+# show (on screen) all two letter files in /bin
+ls /bin/??
+
+# show (on screen) a long list of all two letter files in /bin; store to file xyz 
+ls /bin/?? | tee xyz
+
+# show (on screen) a long list of all two letter files in /bin
+ls -l /bin/??
+
+# get long list of (unsorted) files, save (unsorted) listing to unsorted. 
+# pipe (unsorted) listing to sort that sorts the listing based on file sizes
+ls -l /bin/?? |tee unsorted |sort -nk5
+
+# do everything as above but also save the final output into file called
+# sorted
+ls -l /bin/?? |tee unsorted |sort -nk5 > sorted
+
+
+
+
+Practice Yourself
+-------------------
+
+Execute the following commands, and explain what happens at each step.
+
+
+1. cd 
+
+2. find /etc -iname "ssh*" 1> sshfiles 2> /dev/null
+
+3. ls; cat sshfiles |head -4 ; rm sshfiles
+
+4. find /etc -name "sshd*" 2>&1 1>/dev/null |wc -l
+
+5. why is the output of this: 0 0 0
+find /etc -name sshd\* > sshd_files  2>/dev/null | wc
+
+(Good for you if you understand all of them)
+

@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# ULI101:       script 2 - get input from user, store it and display back
+# Script name:  whats_your_name
+# Purpose:      understand input, storage, and output
+
+# create a variable and leave it empty
+NAME=
+
+# get input from user and store it in the variable NAME
+read -p "Whats your name? " NAME
+
+# display data entered back to the user
+echo "Hello $NAME"

@@ -1,0 +1,93 @@
+Regular Expressions
+-------------------
+By: Mark Fernandes
+
+Basic Regular Expressions
+-------------------------
+
+    . means any one character
+        so ".ca" matches .ca aca eca ?ca 
+        but "\.ca" matches .ca only
+
+
+Examples from the slides
+------------------------
+# slide 4: literal matches word /disk/ matches the following
+diskette
+disk
+disks
+breakdisks
+
+# ...if case-insensitive searching is done will match 
+DISK Disk diSK dIsk disK 
+
+# ... but not the following
+dis
+isk
+
+# slide 4: literal match for words /my book/
+my book 
+dummy book
+my bookshelf
+
+# ... but not the following
+myself book
+
+# slide 7: . matches 'one of any character' /.nix/
+Unix unix .nix linix
+.nix
+
+# /leaf./ matches
+leaf 
+leafs 
+leafy 
+
+# ... but not 
+Maple Leafs
+
+# similarly /a.t/ matches
+a t 
+ant 
+act
+
+# ... but not 
+at 
+
+# slide 8:  * matches zero or more of item directly before the * so /cart*/ matches 
+car
+cart
+carpool
+caret
+carry
+card
+
+# ... but not
+dart
+ear
+
+# slide 9: [] match one item in character class, so practi[cs]e matches 
+practice
+practise
+
+# ... but not 
+PRACTICE
+PRACTISE
+
+# similarly practi[a-z]e matches
+practine
+practile
+practicse
+practisce
+
+# ... but not 
+PRACTINE
+
+^ anchor signifying beginning of line 
+$ anchor signifying the end of line
+
+So ^# and #$ match lines with # in them as follows
+^# matches all lines that begin with #
+#$ matches all lines that end with #
+^$ match for all blank lines in a file
+
+

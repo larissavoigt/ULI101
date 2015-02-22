@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Display files in directory
+
+echo "files are..."
+
+file=
+
+for file in $(ls)
+do
+   sleep 1
+   echo $file " " 
+done

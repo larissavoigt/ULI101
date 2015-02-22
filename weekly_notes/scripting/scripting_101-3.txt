@@ -1,0 +1,61 @@
+Using a loop in a script
+------------------------
+
+Task 1 is:
+    - show all environment variables.
+
+The way to see environment variables from the command line is to run the following
+command:
+
+$ set|less
+
+The output of that command is the environment variables. 
+
+Task 2 is:
+    - show all the BASH environment variables
+
+Strategy for writing a script that does the same thing as the command above:
+
+- Get the environment variables (using set) into some sort of collection.
+- Go through the collection one item at a time.
+- Display the item if a part of the environment variable matches "BASH".
+
+The script that does this is:
+
+
+---- SCRIPT START BELOW THIS LINE ---
+#!/bin/bash
+
+# get all environment variables into ALL_ENV_VARIABLES
+ALL_ENV_VARIABLES=$(set)
+
+echo "show all variables that have BASH"
+
+# go through each item in the collection
+for EACH_ITEM in $ALL_ENV_VARIABLES
+do
+    # does the item have the word BASH
+    if [[ $(echo $EACH_ITEM|grep BASH) ]]
+    then 
+        # yes then show the item
+        echo $EACH_ITEM
+    fi
+done
+---- SCRIPT END ABOVE THIS LINE ---
+
+
+Exercise:
+----------
+- From the command line, create a temporary directory in your path, call it
+  script-temp.
+
+- go into the directory script-temp and make five files like so:
+    touch file1 file2 file3 file4 file5
+
+- now write a script that will add the ".txt" extension to the files. This means
+  after the script runs, listings should show the following:
+
+    $ls
+    file1.txt file2.txt file3.txt file4.txt file5.txt
+
+

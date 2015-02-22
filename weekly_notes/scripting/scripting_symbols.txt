@@ -1,0 +1,46 @@
+Some bash scripting symbols
+----------------------------
+
+
+$0 - the full path (with the script name) to the script 
+$1 - first parameter sent to script
+$2 - second parameter 
+
+$?   
+    exit status of previous command, generally values greater than zero are
+    errors whereas 0 is no error. Higher number is more severe error.
+
+$#
+    number of arguments passed to the script
+
+$*
+    all arguments does not respect quoting
+
+$@
+    all arguments respects quoting
+
+Number comparisons
+-------------------
+ -lt is numeric less than
+ -gt is numeric greater than
+ -le is numeric less than or equal to
+ -ge is numeric greater than or equal to
+ -ne is not equal
+ -eq is equal
+
+You CANNOT use greater than symbol '>'  or less than symbol '<' to do number
+comparisons because the shell uses 
+
+    > to do output redirection, eg: cat abc > /tmp/abc 
+    < to do input redirection, eg: cat < /tmp/abc
+
+
+String comparison
+------------------
+ = for equal
+ != for not equal
+strings do not have less than or greater than methods
+
+
+
+

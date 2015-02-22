@@ -1,0 +1,14 @@
+This file is used for the week 2 practice quiz. The PDF file with all the questions are in:
+
+/home/mark.fernandes/uli101/weekly_notes/wk2practice.pdf
+
+Complete all ten questions of the practice quiz to help you understand the main concepts of week 2. You can ask your friends or the teacher for any of the answers to the quiz. 
+
+Remember Linux/UNIX is all about knowing the commands and using them correctly, so
+understand the questions asked and the answers. It is always possible that there
+might be one or more ways of answering some of the questions asked. Knowing all the
+ways to do something is not as important as knowing at least one way correctly.
+
+Good Luck :)
+
+Mark.

@@ -1,0 +1,140 @@
+BASH Scripting 101 - Interactive Scripting
+------------------------------------------
+This file is available from: 
+
+/home/mark.fernandes/uli101/scripting_101-2.txt
+
+- To run a script, the user needs both +read+ and
+  +excute+ permissions to run the script. Also the user
+  would need pass through permissions (meaning +execute+
+  permissions on the directory) in the directory where
+  the script is located. Having +read+ and +execute+
+  permissions on the directory and the script is best,
+  but in a pinch one at least needs +read+ and +execute+
+  permissions on the script file, but only +execute+
+  permissions on the directory.
+
+if statement
+------------
+
+....SCRIPT BEGINS BELOW THIS LINE.......
+
+#!/bin/bash
+#--------------------------------------------------------
+# Filename  : hello-stranger.bash
+# By        : MF
+# Purpose   : to show interactive scripting
+#             if no input, display "Hello stranger"
+#             message, otherwise display their name.
+#--------------------------------------------------------
+
+# make a variable called NAME, and initialize it to
+# nothing
+NAME=
+
+# Ask the user for their name
+read -p "What is your name? " NAME
+echo "Hello $NAME"
+
+# The lines below show how a simple if statement
+# works. If the condition is true, the if statement
+# is excuted, otherwise if the condition was false
+# nothing happens.
+
+# Typical     |  Alternate (better) if syntax
+#--------------------------------------------
+#if [  ]      |  if [ ]; then
+# then        |     ..if condition was true...
+#  ..true..   |  fi
+#fi           |
+
+# If no input from user then display error message.
+if [ "$NAME" == "" ]; then
+  echo "Hello Stranger"
+fi
+
+....SCRIPT ENDS ABOVE THIS LINE....
+
+
+if..else statement
+-------------------
+
+....SCRIPT BEGINS BELOW THIS LINE.......
+
+#!/bin/bash
+#--------------------------------------------------------
+# Filename  : hello-stranger-2.bash
+# By        : MF
+# Purpose   : to show interactive scripting
+#             if no input, display "Hello stranger"
+#             message, otherwise display their name.
+# This version improves on hello-stranger by doing an
+# if...else condition
+#--------------------------------------------------------
+
+# make a variable called NAME, and initialize it to
+# nothing
+NAME=
+
+# Ask the user for their name
+read -p "What is your name? " NAME
+
+# The lines below show how an if..else statement works. 
+
+# If the condition was true, the if block statements are
+# excuted, otherwise the else block statements are
+# executed. The else only executes if the test condition
+# was false.
+
+# Typical         |  Alternate (better) if syntax
+#--------------------------------------------
+#if [ condition ] |  if [ condition ]; then
+# then            |     ..if condition was true...
+#  ..true..       |  else
+#else             |     ..if condition was false..
+#  ..false..      |  fi
+#fi               |
+
+# If no input from user then display error message.
+if [ "$NAME" == "" ]; then
+  echo "Hello Stranger"
+else
+  echo "Hello $NAME"
+fi
+
+....SCRIPT ENDS ABOVE THIS LINE....
+
+An interactive script, and take actions according to user
+input.
+
+
+Practice Script
+---------------
+
+Using the if..else script above, write a interactive
+script to do the following:
+
+- Get a number from the user
+- If the user enters a number between 0 and 9, display
+  that number in words.
+- If the number is not in the range (0 to 9) then display an
+  error message.
+
+
+
+Additional help
+---------------
+
+- Help is, usually, available at two locations:
+
+$ man bash
+$ man bashbuiltins
+
+- Alternatively you can get help online from:
+
+http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html
+
+or advanced help is at:
+
+HTML:   http://tldp.org/LDP/abs/html/
+PDF:    tldp.org/LDP/abs/abs-guide.pdf

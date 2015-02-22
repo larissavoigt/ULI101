@@ -1,0 +1,100 @@
+Process and Disk Management
+===========================
+
+What is a process? A process is an executing program. Processes in
+Linux are identified by their PID (process ID)
+
+
+Command to list process is
+
+    ps 
+
+Commonly used options with ps
+
+    a show all process by logged in user
+    x show all running processes 
+    u show all processes include user id
+
+
+Command to remove a process from memory is 
+
+    kill (pid)
+
+example
+
+    kill 1234
+
+
+To force a process being killed use -9
+
+    kill -9 (pid)
+
+example
+
+    kill -9 1234
+
+To show all live-update of all running programs use
+
+    top
+
+
+Other commands used in class
+
+1. Show disk file system usage
+
+    df -h
+
+2. Show disk usuage of your own directory (human readable)
+
+    du -chs ~
+
+3. Same thing as 2 (quota shows disk usage of logged in user) 
+
+    quota -s
+
+4. To put a command into the background use & for example to put eog
+   into the background use
+
+    eog &
+
+5. To list all background jobs
+
+    jobs
+
+6. To bring into the foreground use 
+
+    fg (job number, NOTE this is different from PID)
+
+7. To put into background use 
+
+    bg (job number)
+
+8. To suspend a job and put into the background use <CTRL>+Z on the
+   job as its running.
+
+
+
+
+Practice Question
+=================
+
+Using
+
+    ps axu
+
+Get a list of all unique users that are running programs in memory.
+Hint: you will need to use several pipes; start with cut (with the
+appropriate options to cut). The output in the end should be similar
+to:
+
+ps axu|cut [put your answer here]
+500
+68
+dbus
+gdm
+root
+rtkit
+USER
+
+(note, you will get different results than the one above but the last
+line should be USER)

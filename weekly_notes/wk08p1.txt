@@ -1,0 +1,129 @@
+Links
+-----
+
+- Hard links 
+- Soft links
+
+Hard links
+----------
+Hard links are physical copies of files. Let's say you create a new
+file named file, so 
+
+    touch file
+
+Now
+
+    ls -l file
+
+will show the long listing of that file, for example:
+
+-rw-r--r-- 1 mark.fernandes users 0 Oct 27 11:05 file
+
+Notice the link number is 1 (after the permissions). To check the
+inode number of file use:
+
+    ls -il file
+
+2156060563 -rw-r--r-- 1 mark.fernandes users 0 Oct 27 11:05 file
+
+The i-node number is 2156060563 for file. Now to create a hard link use:
+
+    ln file hlink
+
+To check that a hard link was created, use
+
+    ls -il file hlink
+
+
+2156060563 -rw-r--r-- 2 mark.fernandes users 0 Oct 27 11:05 file
+2156060563 -rw-r--r-- 2 mark.fernandes users 0 Oct 27 11:05 hlink
+
+Notice the i-node number (first number in the long list) is the same
+and that the link count has gone up by 1. This means any changes to
+file automatically get copied to hlink. Try
+
+    echo 'Hello' > file
+    
+To see the contents use
+
+    cat file
+
+Now try
+
+    cat hlink
+
+Notice the content for both are the same. To delete a hard link use 
+
+    rm hlink
+
+Now run 
+
+    ls -il file
+
+You'll see
+
+2156060563 -rw-r--r-- 1 mark.fernandes users 6 Oct 27 11:05 file
+
+Notice the link counter has gone back down to 1. The number 6 is the
+number of characters in file.
+
+
+
+* Hard links can only be made to files, not to directories
+* Every new link created increases the link counter by 1 and reduces
+  disk space by the amount used in the file. So if the file was 1GB in
+  size, the next link will reduce the available disk space by 1GB.
+
+Soft links
+----------
+Soft links are shortcuts to a file or directory. To create a soft link
+use:
+
+    ln -s file slink
+
+Now
+
+    ls -l file slink
+    
+will show
+
+-rw-r--r-- 1 mark.fernandes users 6 Oct 27 11:14 file
+lrwxrwxrwx 1 mark.fernandes users 4 Oct 27 11:21 slink -> file
+
+
+and 
+
+    ls -il file slink
+
+
+2156060563 -rw-r--r-- 1 mark.fernandes users 6 Oct 27 11:14 file
+2156060564 lrwxrwxrwx 1 mark.fernandes users 4 Oct 27 11:21 slink -> file
+
+Notice the inode numbers are different. If you tried
+
+    cat slink 
+
+You will see the contents of file, which would be 'Hello'
+
+
+* Soft links can be made to files and directories
+* Deleting the target does not delete the link (but the link is now
+  useless).
+
+So 
+
+    rm file 
+
+will show
+
+
+lrwxrwxrwx 1 mark.fernandes users 4 Oct 27 11:21 slink -> file
+
+but the link is pointing nowhere, if you try
+
+    cat slink
+
+You will get an error message, like so:
+
+    cat: slink: No such file or directory
+

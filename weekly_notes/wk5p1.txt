@@ -1,0 +1,160 @@
+Using find to locate files
+--------------------------
+
+- Problem: You know the partial name of a file (say it has the word
+  'people' in it) but you do not know where it is located. How will
+  you find it? (answer is below but read on) You can get help by
+  using:
+    
+  man find
+
+- In brief the find command works as follows:
+
+  find (where to search) (what options to use when search)
+
+  where to search: is the location where the file likely is, defaults
+  to current working directory, but it can be an absolute or relative
+  path
+
+  what options to use while searching:
+
+    -name [filename] searches for files that match filename
+    -iname [filename] same as name, but ignore case
+    -size [+]n[kMG] 
+        when + is used, it means more than n
+        n is a number
+        k is kilobyte
+        M is MB
+        G is GB
+
+    -mtime [+-]n 
+        when + means after, - means before
+        n is number of days
+
+
+    Answer
+        find ~mark.fernandes/uli101 -iname "*peo*"
+
+- Find all files that are larger than 10MB in your home directory.
+
+    Answer
+        find ~ -size +10M
+
+- You want to count the number of lines in the file people.csv
+
+    Answer
+        wc -l people.csv (that is lower case L)
+
+- You want to see the first/last ten(or n) lines of the file people.csv
+
+    Answers
+        head people.csv (shows first ten lines)
+        tail people.csv (shows last ten lines)
+        head -3 people.csv (shows first three lines)
+        tail -1 people.csv (shows last line)
+
+- You want to see the third line of file people.csv
+
+    Answer
+        head -3 people.csv | tail -1
+
+- You want to see all people in ON (Ontario) in the people.csv
+
+    Answer
+        grep "ON" people.csv
+
+- You want to see all people who have .ca as their email address
+
+    Answer
+        (attempt 1) grep ".ca" people.csv   
+            (but this shows any one character including . that is before ca)
+
+
+- You want to see all Canadian addresses only
+
+    HINT 
+        (use the postal code to get the result)
+
+    Answer
+     grep "[A-Z][0-9][A-Z] [0-9][A-Z][0-9]" people.csv 
+    
+
+- You want to see all US addresses only
+
+    HINT 
+        (think about using the reverse of the above search)
+
+    Answer
+grep -ve ",[A-Z][0-9][A-Z] [0-9][A-Z][0-9]," people.csv |grep -Ee "[0-9]{5}"
+
+- You want to see a summary of number of people in each state/province i.e.
+  something like this
+
+    8 ON
+    2 BC
+    ...
+
+    Answer
+
+        cut -d"," -f7 people.csv| sort | uniq -c | sort 
+
+
+sort command
+------------
+
+The sort command works as follows
+
+    sort [options] filename
+
+- to sort people.csv alphabetically by first field (which in people.csv is
+  their last names) use
+
+    sort people.csv
+
+- to sort people.csv alphabetically by the second field (which in people.csv
+  is their first names) use
+
+    sort -t, -k2 people.csv
+    notes: 
+        -t is used specify a delimiter, which in this case is a comma
+        -k is used to specify a field (here it is the second field)
+
+- to sort people.csv numerically by their US Zip codes
+    
+    grep "[0-9][0-9][0-9][0-9][0-9]," people.csv|sort -t, -nk6
+    notes:
+        first get only US Zip codes (5 digit number in the sixth field)
+        then sort numerically (-n) on the sixth field (-k6)
+
+
+
+Practice Yourself
+-----------------
+
+
+1. How many accounts in /etc/passwd are daemons?
+2. Sort and display in /etc/passwd all accounts that:
+    
+    a. are not daemons 
+    b. are daemons
+
+3. How many accounts in /etc/passwd do not permit login, meaning their
+   login shell is /bin/false or /sbin/nologin
+
+4. Sort and display answer to practice problem #3
+
+5. Count the number of groups in /etc/group
+
+6. Show all the users on matrix with their user-id followed by
+   full username.
+
+
+[REALLY TOUGH]
+7. Sort all records in people.csv based on their 3-digit telephone codes
+
+8. Compare all records in /etc/group with /etc/passwd and print
+
+   a. all accounts that are common to both /etc/passwd and /etc/group
+   b. all accounts that only exist in /etc/passwd but not  /etc/group
+   c. all accounts that only exist in /etc/group but not  /etc/passwd
+

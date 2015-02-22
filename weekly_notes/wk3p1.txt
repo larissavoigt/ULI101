@@ -1,0 +1,179 @@
+Important topics in Week 3
+--------------------------
+
+* Absolute and relative pathnames
+    
+    - All absolute paths begin with /
+    - All absolute pathnames to a file (or directory) are unique
+    - Absolute pathnames can be used to specify a location
+      unambiguously to any user.
+
+    - Relative pathnames are relative to the:
+
+        ** present working directory (pwd) also called current directory
+        ** home directory (~ denotes the home directory). 
+        ** parent directory relative to current directory is denoted by '..'
+        ** current, or present, directory is denoted by '.' (one dot)
+    
+    - Relative pathnames begin with anything other than /
+    - Sometimes relative paths can be shorter compared to absolute
+      paths
+    - Relative to home pathnames begin with ~
+    - Relative pathnames may not be the same for all users because
+      relative-to-home '~' is different for every user. Also current,
+      or present, directory '.' and parent directory '..' is dependent
+      on pwd.
+
+Examples
+--------
+
+ls command is used to show list of files, with different paths
+
+- Absolute path examples
+
+    ls  /
+    ls  /etc
+    ls  /usr/bin
+
+- Relative path examples
+
+    * relative to present directory 
+
+        ls .
+        ls
+
+    * relative to parent directory
+
+        ls ..
+
+    * relative to home of logged in user (may not be mark.fernandes)
+
+        ls ~
+
+    * relative to user mark.fernandes' home
+
+        ls ~mark.fernandes
+
+* Unix shells
+
+    - shell is a program that interacts with the user (on the one
+      hand) through the keyboard and the operating system (on the
+      other)
+
+    - there are many shells but the popular ones are:
+
+        ** sh   (Bourne shell): original shell
+        ** bash (Bourne again shell): default on all Linux distros
+        ** csh  (C shell): default on all BSD flavours
+        ** ksh  (Korn shell): default on commercially UNIX system
+        ** zsh  (Z shell)
+
+
+
+
+
+
+
+Tips and Advice
+---------------
+
+- You got to know what you are looking for before you can find/search
+  for it.
+
+- Experiment by running all files in the /bin directory. Look up
+  Wikipedia/Google on each of those commands. Some might seem useful,
+  others not so much but every one of them serves some purpose
+  otherwise they would not be there.
+
+- Use 'man' to get more information about a command.
+
+- Every file whose pathname is located by / is unique, meaning it is
+  not possible to have two files with the same name in the same
+  directory.
+        
+- Home directory for every user on the system is unique, just as the
+  login username must be unique. It is under /home and has the same
+  name as the user name. It is also the location that the user is in
+  after logging onto the system.
+
+
+- When you make a mistake with a command you can quit it by pressing
+  <CTRL>+C, which is the universal way in Linux/UNIX to interrupt a
+  command.
+
+
+
+Practice
+--------
+
+To practice with the Live CD, do the following:
+
+Copy weekly_notes into your Live CD and change into weekly_notes
+
+    $ cd weekly_notes
+
+Become super user
+
+    $ su
+
+Run the sample tree
+
+    $ bash uli101_sample_tree
+
+    - in case you get an error, it might be because:
+        * you are not superuser, in which case use su
+        * you are not in weekly_notes, change into * weekly_notes
+        * you already created the tree
+
+Become user lisa
+
+    $ su
+    $ su lisa
+    $ whoami
+
+Change into /var
+
+    $ cd /var
+
+Now practice the following commands (use one command for each
+task) NOTE: your PWD for all questions is /var and your home directory
+is /home/lisa:
+
+    1. using relative paths, copy file1 into your home directory (it
+      should be in /home/lisa after copying)
+
+    2. using absolute paths, move files file14 and file16 into tmp
+
+    3. rename file8 to file18 using the shortest paths
+
+    4. Make the following directory tree in your home directory and
+       solve the following puzzles
+
+rough_work
+├── play
+│   ├── games
+│   │   └── tetris
+│   └── movies
+│       └── matrix
+└── work
+    ├── programs
+    │   └── ipc144.c
+    └── scripts
+        └── uli101.bash
+
+    5. Assume your pwd is movies. Copy programs and its files into
+       games. This means after the command completes you should have a
+       subdirectory within games called programs that has ipc144.c in
+       it.
+
+    a. Use parent directory pathname (..)
+    b. Use current directory pathname (.)
+    c. Use relative-to-home directory pathname (~)
+    d. Which of the three paths above (a,b, or c) is the shortest. 
+    e. If instead of copying to games, you copied to your present
+       working directory (movies) how would that further shorten the
+       relative pathname? Does it actually reduce the pathname?
+
+    6. Delete the sub-directory programs (and its files) that you
+       copied in games using absolute pathnames.
+
